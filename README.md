@@ -21,11 +21,11 @@ Some resistors are not added in the scheme because I done it quickly. However, d
 
 Adding to this, I have programmed a Python GUI app to make a chip programming more easier for the following chip:
 
-- Amic A29F040.
+- Amic A29040.
 - AMD AM29F040.
 - AMD AM29F010.
 
-The app bugs sometimes, but you are free to add or customize the code ;) 
+The app is in beta version. You are free to add or customize the code ;) 
 
 REQUIREMENTS:
 - Computer with linux/Windows 7. Linux is recommanded.
