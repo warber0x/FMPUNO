@@ -15,7 +15,7 @@ from wx.lib.buttons import GenBitmapTextButton
 class programmer_gui(wx.Frame): 
         def __init__(self, parent, id):
                 
-                wx.Frame.__init__(self, parent, id, 'AMD Programmer', size = (900, 380), style=wx.DEFAULT_FRAME_STYLE ^ wx.RESIZE_BORDER ^ wx.MAXIMIZE_BOX ^ wx.MINIMIZE_BOX)
+                wx.Frame.__init__(self, parent, id, 'AMD Programmer - By Warber0x (Radouane SAMIR)', size = (900, 380), style=wx.DEFAULT_FRAME_STYLE ^ wx.RESIZE_BORDER ^ wx.MAXIMIZE_BOX ^ wx.MINIMIZE_BOX)
                 
                 panel = wx.Panel(self, pos = (0, 100), size = (700, 200))
                 self.percent = 0
@@ -82,7 +82,7 @@ class programmer_gui(wx.Frame):
                 self.flashref = wx.TextCtrl(panel, -1, pos=(85, 40), size=(100, -1), style=wx.TE_READONLY)
                 
                 label3 = wx.StaticText(panel, -1, "Baude Rate: ", (10, 78))
-                baude = ['115200','38400', '9600']
+                baude = ['115200', '57600', '38400', '28800', '19200', '14400', '9600', '4800']
                 self.baudBox = wx.ComboBox(panel, -1, pos=(85, 73), size=(100, -1), choices=baude, style=wx.CB_READONLY)
                 
                 label4 = wx.StaticText(panel, -1, "Game File: ", (10, 110))
