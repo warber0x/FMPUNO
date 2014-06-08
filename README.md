@@ -5,19 +5,19 @@ Arduino Flash Memory Programmer --AFMP--
 - Nickname in arduino forum: BlackSharp.
 - Country: Morocco - casablanca
 - Date of the first release: 12/24/2013.
-- Date of the release in GitHub: 06/05/2014.
+- Date Github publish: 06/05/2014.
 - E-mail: Sam.Rad@Hotmail.fr
 
 
 This project is a Flash memory programmer based on Arduino UNO.
 
-The main reason of creating this project is to be able to program a chip for gameboy cartridge and play any game you want. Unfortunately the commercial programmer is expensive and creating your own is more fun.
+The main reason of creating this project is to be able to program a chip for gameboy cartridge and play any game I want. Unfortunately the commercial programmer is expensive and creating your own is fun and easy instead.
 
-Here you will find the graphic scheme of the project as JPEG format and in Fritzing format.
+Here you will find the graphic scheme of the project as JPEG format and also in Fritzing format.
 
-I suggest to everyone who like to create the same thing to respect the wiring done in the project to be sure that the code works. The scheme is not yet perfect (Not enough time) but I'll try to increase it gradually.
+I suggest to everyone who like to create the same thing to respect the wiring done in the project to ensure that the code works. The diagram is not perfect (Not enough time) but I'll try to increase it gradually.
 
-Some resistors are not added in the scheme because I done it quickly. However, don't forget the resistors for every input in arduino, and in the shift registers to avoid the floating state values (Main problem if it doesn't work). All of the resistors in the project are in 10Kohms.
+Some resistors are not added in the diagram because I done it quickly. However, don't forget the resistors for every input in arduino and in the shift registers (The floating state values main problem if it doesn't work). All of the resistors in the project are in 10Kohms.
 
 Adding to this, I have programmed a Python GUI app to make a chip programming more easier for the following chip:
 
