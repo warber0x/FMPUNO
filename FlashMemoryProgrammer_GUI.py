@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+#@Author of this software: Radouane SAMIR.
+#@Date: 26/12/2014
+#@Version: 0.1 Beta
+#@Baud rate: 9600 (Bug sometimes), 4800 (Stable) 
+
 #THIS NEEDS A WXPYTHON TO BE EXECUTED.
 
 import wx
