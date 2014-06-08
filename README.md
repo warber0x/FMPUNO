@@ -17,7 +17,7 @@ Here you will find the graphic scheme of the project as JPEG format and also in 
 
 I suggest to everyone who like to create the same thing to respect the wiring done in the project to ensure that the code works. The diagram is not perfect (Not enough time) but I'll try to increase it gradually.
 
-Some resistors are not added in the diagram because I done it quickly. However, don't forget the resistors for every input in arduino and in the shift registers (The floating state values main problem if it doesn't work). All of the resistors in the project are in 10Kohms.
+Some resistors are not added in the diagram because I done it quickly. Therefore, don't forget to add resistor for every input in arduino and in the shift registers (The floating state values is the main problem if it doesn't work). All of the resistors in the project are in 10Kohms.
 
 Adding to this, I have programmed a Python GUI app to make a chip programming more easier for the following chip:
 
@@ -25,14 +25,14 @@ Adding to this, I have programmed a Python GUI app to make a chip programming mo
 - AMD AM29F040.
 - AMD AM29F010.
 
-The app is in beta version. You are free to add or customize the code ;) 
+The app is in beta version. It crashes sometimes when the upload is finished. You are free to increase or customize the code (But keep my name plz).
 
 REQUIREMENTS:
 - Computer with linux/Windows 7. Linux is recommanded.
 - Wx.python library o execute the python program.
 - Arduino IDE with the Flash_memory_programmer Sketch.
-- Circuit
-- Chip AM29F010-40, A29F010-40
+- Circuit & Diagram
+- Chip AM29F010-40, A29010-40
 
 
 
