@@ -1,6 +1,6 @@
 /* @Author: Radouane SAMIR
    @Version: 0.1
-   @Chip version: AM29F010 A29F040
+   @Chip version: AM29F010 A29040
    
    This code is tested on AM29F010.
    
