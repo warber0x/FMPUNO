@@ -3,7 +3,7 @@
 #@Author of this software: Radouane SAMIR.
 #@Date: 26/12/2014
 #@Version: 0.1 Beta
-#@Baud rate: 9600 (Bug sometimes), 4800 (Stable) 
+#@Baud rate: Check the arduino Sketch
 
 #THIS NEEDS A WXPYTHON TO BE EXECUTED.
 
@@ -17,16 +17,18 @@ import threading
 
 from wx.lib.buttons import GenBitmapTextButton
 
+
 class programmer_gui(wx.Frame): 
         def __init__(self, parent, id):
                 
-                wx.Frame.__init__(self, parent, id, 'AMD Programmer - By Warber0x (Radouane SAMIR)', size = (900, 380), style=wx.DEFAULT_FRAME_STYLE ^ wx.RESIZE_BORDER ^ wx.MAXIMIZE_BOX ^ wx.MINIMIZE_BOX)
-                
+                wx.Frame.__init__(self, parent, id, 'FMPUNO (Flash Memory Programmer UNO) - By Warber0x (Radouane SAMIR)', size = (900, 380), style=wx.DEFAULT_FRAME_STYLE ^ wx.RESIZE_BORDER ^ wx.MAXIMIZE_BOX ^ wx.MINIMIZE_BOX)
                 panel = wx.Panel(self, pos = (0, 100), size = (700, 200))
                 self.percent = 0
                 
-                #png = wx.Image('/root/Desktop/Flash_EEPROM_Programmer_soft/Programmer V1.2/arduino2.png', wx.BITMAP_TYPE_PNG).ConvertToBitmap()
-                #wx.StaticBitmap(panel, -1, png, (723, 221), (png.GetWidth(), png.GetHeight()))
+                img = wx.Image('./avr.png')
+                img.Rescale(170, 170)
+                png = wx.BitmapFromImage(img)
+                wx.StaticBitmap(panel, -1, png, (713, 130), (png.GetWidth(), png.GetHeight()))
                 
                 #Menu Gui
                 status = self.CreateStatusBar()
@@ -67,13 +69,13 @@ class programmer_gui(wx.Frame):
                 #imageInfo = wx.Image(imageFile4, wx.BITMAP_TYPE_ANY).ConvertToBitmap()
                 
                 font3 = wx.Font(12, wx.NORMAL, wx.ITALIC, wx.BOLD)
-                label6 = wx.StaticText(panel, -1, "Memory Operations", (20, 180))
+                label6 = wx.StaticText(panel, -1, "Memory Operations", (30, 180))
                 label6.SetFont(font3)
                 
-                self.buttonProgram = wx.Button(panel, id=-1,  label="Upload", pos = (50, 210), size = (65, 40))
-                self.buttonRead = wx.Button(panel, id=-1, label="Read",  pos = (50+70, 210), size = (65, 40))
-                self.buttonErase = wx.Button(panel, id=-1,  label="Erase",pos = (50, 250), size = (65, 40))
-                self.buttonInfo = wx.Button(panel, id=-1, label="Infos", pos = (50+70, 250), size = (65, 40))
+                self.buttonProgram = wx.Button(panel, id=-1,  label="Upload", pos = (50, 220), size = (65, 40))
+                self.buttonRead = wx.Button(panel, id=-1, label="Read",  pos = (50+65, 220), size = (65, 40))
+                self.buttonErase = wx.Button(panel, id=-1,  label="Erase",pos = (50, 260), size = (65, 40))
+                self.buttonInfo = wx.Button(panel, id=-1, label="Infos", pos = (50+65, 260), size = (65, 40))
                 
                 self.textarea = wx.TextCtrl(panel, pos=(240, 10), style=wx.TE_MULTILINE | wx.TE_READONLY, size=(450,265))
                 
@@ -123,7 +125,7 @@ class programmer_gui(wx.Frame):
                 self.Bind(wx.EVT_BUTTON, self.OnInfos, self.buttonInfo)
                 self.Bind(wx.EVT_CLOSE, self.OnExit)    
                 
-                self.intro = 'ARDUINO AMD FLASH MEMORY PROGRAMMER - XXX29F0XX Series\n@Version: 1.0\n@Arduino ver: UNO\n@Author: Radouane SAMIR - SamCreation 2013\n\nPlease connect your programmer, select the serial port, choose the baud rate and press one of the operations\n\n'
+                self.intro = 'ARDUINO AMD FLASH MEMORY PROGRAMMER - XXX29F0XX Series\n@Version: 1.0\n@Arduino ver: UNO\n@Author: Radouane SAMIR - SamCreation 2013\n\nPlease connect your programmer, select the serial port, choose the baud rate and press one of the operations\n\nThe programmed baudrate in this version is 115200\n\n'
                 self.intro = self.intro.upper()
                 self.textarea.SetValue(self.intro);
                 
@@ -181,9 +183,7 @@ class programmer_gui(wx.Frame):
                 car = ''
                 self.textarea.SetValue(self.intro)
                 
-                if (str(self.serialBox.GetValue()) != '' and baudrate != ''):
-                        self.SetStatusText("Please wait ...")
-                        
+                if (str(self.serialBox.GetValue()) != '' and baudrate != ''):                        
                         line = 1
                         car = self.textarea.GetValue()
                         count = 0
@@ -193,9 +193,18 @@ class programmer_gui(wx.Frame):
                         i = 0
                         linecount = 0
                         
-                        arduino = serial.Serial(port, int(baudrate), timeout = 1)
+			try:
+                        	arduino = serial.Serial(port, int(float(baudrate)), timeout = 1)
+			except:
+				dlg = wx.MessageDialog(self, "Can't communicate with Arduino, please check serial ports !!!", "Communication Problem", wx.OK)
+                        	dlg.ShowModal()
+                        	dlg.Destroy()
+				return
+	
                         time.sleep(2)
                         
+                        self.SetStatusText("Please wait ...")
+
                         car = car + str(struct.pack(">I", linecount).encode('hex')) + "          "
                         car = car.upper()
                         
@@ -236,7 +245,7 @@ class programmer_gui(wx.Frame):
                         self.textarea.SetValue(car)
                         
                 else:
-                        dlg = wx.MessageDialog(self, "Please check the value selected", "Incorrect values", wx.OK)
+                        dlg = wx.MessageDialog(self, "Can't communicate with Arduino, please check the fileds", "Incorrect values", wx.OK)
                         dlg.ShowModal()
                         dlg.Destroy()
                         #self.textarea.SetValue(car)
@@ -246,17 +255,26 @@ class programmer_gui(wx.Frame):
                 port = "/dev/" + str(self.serialBox.GetValue())
                 baudrate = str(self.baudBox.GetValue())
                 
-                if (str(self.serialBox.GetValue()) != '' and baudrate != ''):
-                        self.SetStatusText("Please wait ...")
-                        
+                if (str(self.serialBox.GetValue()) != '' and baudrate != ''):                        
                         #self.textarea.SetValue('')
                         port = "/dev/" + str(self.serialBox.GetValue())
                         baudrate = str(self.baudBox.GetValue())
                         #serial = 0
         
                         percent = 0
-                        arduino = serial.Serial(port, int(baudrate), timeout = 1)
+
+                        try:
+                                arduino = serial.Serial(port, int(float(baudrate)), timeout = 1)
+                        except:
+                                dlg = wx.MessageDialog(self, "Can't communicate with Arduino, please check serial ports", "Communication Problem", wx.OK)
+                                dlg.ShowModal()
+                                dlg.Destroy()
+                                return
+
                         time.sleep(2)
+
+			self.SetStatusText("Please wait ...")
+
         
                         arduino.write("E")
                         response = ''
@@ -277,7 +295,7 @@ class programmer_gui(wx.Frame):
         
                         arduino.close()
                 else:
-                        dlg = wx.MessageDialog(self, "Please check the value selected", "Incorrect values", wx.OK)
+                        dlg = wx.MessageDialog(self, "Can't communicate with Arduino, please check the fields", "Incorrect values", wx.OK)
                         dlg.ShowModal()
                         dlg.Destroy()
                         
@@ -290,38 +308,55 @@ class programmer_gui(wx.Frame):
                 ########################################################################
 
                 gameSize = 0
-                
+
                 #Open Serial port and wait arduino to reset
                 port = "/dev/" + str(self.serialBox.GetValue())
                 baudrate = str(self.baudBox.GetValue())
-                arduino = serial.Serial(port, int(baudrate), timeout = 1)
+		
+		try:
+                	arduino = serial.Serial(port, int(float(baudrate)), timeout = 1)
+                except:
+                        dlg = wx.MessageDialog(self, "Can't communicate with Arduino, please check serial ports", "Communication Problem", wx.OK)
+                        dlg.ShowModal()
+                        dlg.Destroy()
+                        return
+
+                self.SetStatusText("Please wait ...")
                 time.sleep(2)
 
                 #Get Game size and send it to Arduino
                 path = self.uploadText.GetValue()
-                gameSize = os.path.getsize(path)
-
-                #Send begin command to Arduino and
-                #Wait OK from Arduino to begin programming
-                #Set Arduino in programming mode and wait for its response
-
-                arduino.write('W')
-                while (arduino.read() != '+'):
-                        pass
-
-                arduino.write(str(gameSize))    
-        
-                while (arduino.read() != '+'):
-                        pass
-
-                game = open(self.uploadText.GetValue(), 'r')
-
-                total = gameSize / 100
-                percent = 0
                 
-                progressFrame = progressBar(parent = None, id = -1)
-                progressFrame.Show()
-                thread.start_new_thread(progressFrame.update, (gameSize, game, total, arduino,self,))
+                if (path != ''):
+			
+			gameSize = os.path.getsize(path)
+
+			#Send begin command to Arduino and
+			#Wait OK from Arduino to begin programming
+			#Set Arduino in programming mode and wait for its response
+
+			arduino.write('W')
+			while (arduino.read() != '+'):
+				pass
+
+			arduino.write(str(gameSize))    
+		
+			while (arduino.read() != '+'):
+				pass
+
+			game = open(self.uploadText.GetValue(), 'r')
+
+			total = gameSize / 100
+			percent = 0
+			
+			#progressFrame = progressBar(parent = None, id = -1)
+			#progressFrame.Show()
+			#thread.start_new_thread(self.OnNewUpdate, (gameSize, game, total, arduino,self,))
+			self.OnNewUpdate(gameSize, game, total, arduino, self,)
+		else:
+			dlg = wx.MessageDialog(self, "Gameboy ROM file is missing", "ROM File", wx.OK)
+                        dlg.ShowModal()
+                        dlg.Destroy()
         
         def OnInfos(self, event):
                 #Get Device ID - First
@@ -351,7 +386,15 @@ class programmer_gui(wx.Frame):
                         baudrate = str(self.baudBox.GetValue())
                 
                         percent = 0
-                        arduino = serial.Serial(port, int(baudrate), timeout = 1)
+			
+			try:
+        	                arduino = serial.Serial(port, int(float(baudrate)), timeout = 1)
+	                except:
+                	        dlg = wx.MessageDialog(self, "Can't communicate with Arduino, please check serial ports", "Communication Problem", wx.OK)
+                        	dlg.ShowModal()
+                        	dlg.Destroy()
+                        	return
+
                         time.sleep(2)
                         
                         response1 = '0x'
@@ -360,13 +403,18 @@ class programmer_gui(wx.Frame):
                         arduino.write("D")
                         while (1):
                                 car = arduino.read()
-                                if (car == '\n' or car == '\r'):
-                                        break
                         
                                 if (car != '\n' and car != '\r'):
-                                        response1 += car
-                                        ref += car
-        
+                                	response1 += car
+                                	ref += car
+                                
+				if (car == '\n' or car == '\r'):
+                                        break
+				
+			#Just to complete the DevID field#
+			if (ref == "0"):
+        			response1 += "0"
+
                         self.devid.SetValue(response1)
                         arduino.close() 
                         
@@ -386,7 +434,7 @@ class programmer_gui(wx.Frame):
                                 baudrate = str(self.baudBox.GetValue())
                 
                                 percent = 0
-                                arduino = serial.Serial(port, int(baudrate), timeout = 1)
+                                arduino = serial.Serial(port, int(float(baudrate)), timeout = 1)
                                 time.sleep(2)
                         
                                 response2 = '0x'
@@ -399,7 +447,9 @@ class programmer_gui(wx.Frame):
                         
                                         if (car != '\n' and car != '\r'):
                                                 response2 += car
-                                                man += car                                      
+                                                man += car
+					
+				                                    
                                         
                                 while (counter <= 99):
                                         counter += 1
@@ -414,6 +464,8 @@ class programmer_gui(wx.Frame):
                                         self.flashref.SetValue("AMD ")
                                 if (man == '37'):
                                         self.flashref.SetValue("AMIC ")
+				if (man != '37' and man != '01'):
+					self.flashref.SetValue("No chip found")
                                         
                                 if (ref == '20'):
                                         self.flashref.SetValue(self.flashref.GetValue() + "AM29F010B")
@@ -424,17 +476,59 @@ class programmer_gui(wx.Frame):
                                                 
                         
                 else:
-                        dlg = wx.MessageDialog(self, "Please check the value selected", "Incorrect values", wx.OK)
+                        dlg = wx.MessageDialog(self, "Please check the fields", "Incorrect values", wx.OK)
                         dlg.ShowModal()
                         dlg.Destroy()
-                                                
+        
+        #Code recently added this code is for a new progress bar
+	#The old one bugged sometimes, so I have to change its code
+
+        def OnNewUpdate(self, gameSize, gamepath, total, arduinoport, mainFrame):
+	      pulse_dlg = wx.ProgressDialog(title="Upload Command", message="Uploading, Please wait ...", maximum=gameSize)
+
+	      ''' Old Code '''
+	      #Some stuff happens
+	      #self.progressBar.SetRange(gameSize)
+	      ''' End Code '''
+
+	      mainFrame.setButtonDisable()
+	      car = ''
+	      
+	      for x in range(0, gameSize):
+		      car = gamepath.read(1)
+		      arduinoport.write(car)
+
+		      ''' Some Old Code '''
+		      #time.sleep(0.006)
+		      #self.progressBar.SetValue(x)
+		      #self.Refresh()
+		      #wx.MilliSleep(1)
+		      ''' End Code '''
+
+		      pulse_dlg.Update(x)
+
+	      #self.SetStatusText("Uploading is almost finished ... ")
+	      #time.sleep(2)
+	      self.SetStatusText("Upload completed.")
+	      
+	      mainFrame.setButtonEnable()
+	      arduinoport.close()
+	      gamepath.close()
+	      pulse_dlg.Destroy()
+	      
+	      dlg = wx.MessageDialog(self, "Upload completed", "Information", wx.OK)
+              dlg.ShowModal()
+              dlg.Destroy()
+  
+	      return
+		                              
 class progressBar(wx.Frame):
         def __init__(self, parent, id):
                 self.window = wx.Frame.__init__(self, parent, id,'ProgressBar', size=(360, 90), style=wx.DEFAULT_FRAME_STYLE ^ wx.RESIZE_BORDER ^ wx.MAXIMIZE_BOX ^ wx.MINIMIZE_BOX)
                 status = self.CreateStatusBar()
                 panel = wx.Panel(self, pos = (0, 0), size = (100, 300))
                 self.progressBar = wx.Gauge(panel, -1, 0, pos=(30, 20), size=(300, 30))
-                self.SetStatusText("Please Wait ... Uploading is in progress")
+                self.SetStatusText("Uploading is in progress, Please wait ")
                 self.Bind(wx.EVT_CLOSE, self.OnClose)
                 
         def update(self, gameSize, gamepath, total, arduinoport, mainFrame):
@@ -480,4 +574,3 @@ if __name__ == '__main__':
         thread1.start() 
         app.MainLoop()          
         
-
