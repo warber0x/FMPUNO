@@ -240,27 +240,6 @@ void flash_data_set(uint8_t data)
   }
 }
 
-void flash_data_set2(uint8_t data)
-{  
-  /* Put data on the chip data bus */  
-  for (int i = 0; i < 8; i++)
-  {
-    if (!(data&(1<<i)))
-    {
-      digitalWrite(i+2, LOW);
-      pinMode(i+2, INPUT);
-      //Serial.println("LOW");
-
-    }
-    else if (data&(1<<i))
-    {
-     pinMode(i+2, OUTPUT);
-     digitalWrite(i+2, HIGH);
-    // Serial.println("HIGH");
-    }
-  }
-}
-
 /** 
  * Get Data from the chip *
  * MIND: the pull-down resistors
@@ -585,7 +564,7 @@ void flash_erase_memory()
 }
 
 /* To erase AM29F040 */
- *********************/
+/*********************/
 
 void flash_erase_memory2()
 {
@@ -658,7 +637,7 @@ void startProgramming()
 
 void setup()
 {
-  Serial.begin(4800);
+  Serial.begin(115200);
   //ANALOG_CONFIG;
   
   int c = 0;
