@@ -10,8 +10,8 @@ Arduino Flash Memory Programmer --AFMP--
 - Video link: https://www.youtube.com/watch?v=7V1QDSTN65g&nohtml5=False
 
 IMPORTANT NOTICE: The wiring has an issue
-PIN 32 -> VCC
-PIN 16 -> Ground
+* PIN 32 -> VCC
+* PIN 16 -> Ground
 
 This project is a Flash memory programmer based on Arduino UNO.
 
