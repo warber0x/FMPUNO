@@ -7,6 +7,7 @@ Arduino Flash Memory Programmer --AFMP--
 - Date of the first release: 12/24/2013.
 - Date Github publish: 06/05/2014.
 - E-mail: Sam.Rad@Hotmail.fr
+- Video link: https://www.youtube.com/watch?v=7V1QDSTN65g&nohtml5=False
 
 
 This project is a Flash memory programmer based on Arduino UNO.
