@@ -15,15 +15,15 @@ IMPORTANT NOTICE: The wiring has an issue
 
 This project is a Flash memory programmer based on Arduino UNO.
 
-The main reason of creating this project is to be able to program a chip for gameboy cartridge and play any game I want. Unfortunately the commercial programmer is expensive and creating your own is fun and easy instead.
+The main reason for creating this project is to be able to program a flash memory into gameboy cartridge and play any game you want. Unfortunately, the commercial programmer is expensive and creating your own is fun ...
 
-Here you will find the graphic scheme of the project as JPEG format and also in Fritzing format.
+In this repo you'll find the graphic scheme of the project in JPEG format as well as in Fritzing format.
 
-I suggest to everyone who like to create the same thing to respect the wiring done in the project to ensure that the code works. The diagram is not perfect (Not enough time) but I'll try to increase it gradually.
+I will tell to anyone who wants to create the same thing to respect the wiring. The diagram is not perfect (Not enough time) but I'll try to increase it gradually.
 
-Some resistors are not added in the diagram because I done it quickly. Therefore, don't forget to add resistor for every input in arduino and in the shift registers (The floating state values is the main problem if it doesn't work). All of the resistors in the project are in 10Kohms.
+Some resistors are not added in the diagram. Therefore, don't forget to add resistor for every input in arduino and in the shift registers (The floating state values is the main problem if it doesn't work). All of the resistors in the project are in 10Kohms.
 
-Adding to this, I have programmed a Python GUI app to make a chip programming more easier for the following chip:
+Adding to this, I have programmed a Python GUI software to make a chip programming more easier. The supported chips are:
 
 - Amic A29040.
 - AMD AM29F040.
