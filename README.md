@@ -6,7 +6,6 @@ Arduino Flash Memory Programmer --AFMP--
 - Country: Morocco - casablanca
 - Date of the first release: 12/24/2013.
 - Date Github publish: 06/05/2014.
-- E-mail: Sam.Rad@Hotmail.fr
 - Video link: https://www.youtube.com/watch?v=7V1QDSTN65g&nohtml5=False
 
 IMPORTANT NOTICE: The wiring has an issue
