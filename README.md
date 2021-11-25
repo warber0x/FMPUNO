@@ -7,6 +7,9 @@
 - Date Github publish: 06/05/2014.
 - Video link: https://www.youtube.com/watch?v=7V1QDSTN65g&nohtml5=False
 
+
+![Cartridge Programmer](CartridgeProgrammer.png)
+
 After so many years, I wanted to bring to life this project and make it more stable especially the GUI app. Now, the application is more stable and works like a charm.
 
 **IMPORTANT NOTICE: The diagram wiring image has an issue**
