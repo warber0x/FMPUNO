@@ -1,7 +1,7 @@
 # Finally FMPUNO Is now compatible with python3 :gift:
 - Author: Samir Radouane.
 - Nickname in arduino forum: BlackSharp (to search through the arduino forum discussion)
-- Country: Morocco - casablanca
+- Country: Morocco
 - Date of the first release: 12/24/2013.
 - Date of last release: 24/11/2021
 - Date Github publish: 06/05/2014.
@@ -10,7 +10,7 @@
 
 ![Cartridge Programmer](CartridgeProgrammer.png)
 
-After so many years, I wanted to bring to life this project and make it more stable especially the GUI app. Now, the application is more stable and works like a charm.
+After so many years, I wanted to bring to life this project that I made before and make it more stable especially the GUI app. Now, the application is more stable and works like a charm.
 
 **IMPORTANT NOTICE: The diagram wiring image has an issue**
 * PIN 32 -> VCC
