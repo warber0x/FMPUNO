@@ -1,7 +1,5 @@
 # Finally FMPUNO Is now compatible with python3 :gift:
-- Author: Samir Radouane.
 - Nickname in arduino forum: BlackSharp (to search through the arduino forum discussion)
-- Country: Morocco
 - Date of the first release: 12/24/2013.
 - Date of last release: 24/11/2021
 - Date Github publish: 06/05/2014.
